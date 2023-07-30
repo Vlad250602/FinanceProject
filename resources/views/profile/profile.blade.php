@@ -3,7 +3,7 @@
 @section('content')
     <section style="background-color: #eee;">
         <div class="container py-5">
-            <div class="row">
+<!--            <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                         <ol class="breadcrumb mb-0">
@@ -13,7 +13,7 @@
                         </ol>
                     </nav>
                 </div>
-            </div>
+            </div>-->
 
             <div class="row">
                 <div class="col-lg-4">
@@ -21,16 +21,15 @@
                         <div class="card-body text-center">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                  class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">John Smith</h5>
+                            <h5 class="my-3">{{Auth::user()->name . ' ' . Auth::user()->surname}}</h5>
                             <p class="text-muted mb-1">Full Stack Developer</p>
                             <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <button type="button" class="btn btn-primary">Follow</button>
-                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                                <button type="button" class="btn btn-outline-primary ms-1">Update profile</button>
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-4 mb-lg-0">
+<!--                    <div class="card mb-4 mb-lg-0">
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
@@ -55,11 +54,16 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-lg-8">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <h5>Total:{{' ' . $total . ' ' . Auth::user()->currency}}</h5>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+<!--                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Full Name</p>
@@ -104,9 +108,40 @@
                                     <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
                                 </div>
                             </div>
+                        </div>-->
+                        <div class="card-header">
+                            Your accounts
                         </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Currency</th>
+                                    <th>Count</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($accounts as $account)
+                                    <tr>
+                                        <td>{{$account->name}}</td>
+                                        <td>{{$account->currency}}</td>
+                                        <td>{{$account->count}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <a href="{{route('account-create')}}">
+                                    <button type="button" class="btn btn-primary">
+                                        Add account
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="row">
+<!--                    <div class="row">
                         <div class="col-md-6">
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
@@ -173,7 +208,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
+    public function view(){
+        return view('accounts.accounts',['accounts' => Account::where('user_id', Auth::user()->id)->get()]);
+    }
     public function create(){
-        return view('account-create');
+        return view('accounts.account-create');
     }
 
     public function createSubmit(Request $request){
@@ -22,10 +25,24 @@ class AccountController extends Controller
 
         $account->save();
 
-        return redirect()->route('cabinet');
+        return redirect()->route('profile');
     }
 
-    public function view(){
-        return view('accounts',['accounts' => Account::where('user_id', Auth::user()->id)->get()]);
+    public function edit($id)
+    {
+        $account = Account::where('id', $id)->first();
+
+        return view('accounts.account-edit', ['account' => $account]);
+    }
+
+    public function editSubmit(Request $request, $id)
+    {
+        $account = Account::where('id', $id)->first();
+
+        $account->name = $request->name;
+
+        $account->save();
+
+        return redirect()->route('accounts');
     }
 }

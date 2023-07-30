@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
+
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
@@ -56,8 +57,16 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('accounts') }}">
                                         {{ __('Accounts') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('transactions') }}">
+                                        {{ __('Transactions') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
