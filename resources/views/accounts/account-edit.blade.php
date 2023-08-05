@@ -12,6 +12,9 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" value="{{$account->name}}">
+                                @error('name')
+                                <div class="alert-danger" style="color: red">Name must be unique</div>
+                                @enderror
                             </div>
                             <br>
                             <button type="submit" class="btn btn-primary">Submit</button>

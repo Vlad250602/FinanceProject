@@ -12,6 +12,9 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" name="name">
+                                @error('name')
+                                <div class="alert-danger" style="color: red">Name must be unique</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="currency">Currency</label>

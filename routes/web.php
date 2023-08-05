@@ -36,3 +36,6 @@ Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 
 
 Route::get('/transaction-create/income',[\App\Http\Controllers\TransactionController::class, 'createIncome'])->name('transaction-create-income');
 Route::post('/transaction-create/income',[\App\Http\Controllers\TransactionController::class, 'createIncomeSubmit']);
+
+Route::get('/transaction-create/expense',[\App\Http\Controllers\TransactionController::class, 'createExpense'])->name('transaction-create-expense');
+Route::post('/transaction-create/expense',[\App\Http\Controllers\TransactionController::class, 'createExpenseSubmit']);

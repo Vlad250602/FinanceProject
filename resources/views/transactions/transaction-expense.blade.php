@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Deposit') }}</div>
+                <div class="card-header">{{ __('Windraw') }}</div>
                     <form method="post">
                         @csrf
                         <div class="card-body">
@@ -30,7 +30,7 @@
                                 <input type="text" id="count" class="form-control" name="count" value="0">
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-primary">Deposit</button>
+                            <button type="submit" class="btn btn-primary">Windrawt</button>
                         </div>
                     </form>
             </div>

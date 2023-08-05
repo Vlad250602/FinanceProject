@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Transaction;
+use App\Services\AccountService;
 use App\Services\RateService;
+use App\Services\TransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,37 +18,40 @@ class TransactionController extends Controller
         $this->middleware('auth');
     }
 
-    public function view()
+    public function view(TransactionService $transactionService)
     {
-        $transactions = DB::table('transactions')
-            ->select('transactions.*', 'accounts.name as account')
-            ->leftJoin('accounts', 'accounts.id', '=', 'transactions.account_id')
-            ->where('transactions.user_id', '=', Auth::user()->id)
-            ->get();
+        $transactions = $transactionService->getUserTransactions();
 
         return view('transactions.transactions', ['transactions' => $transactions]);
     }
 
-    public function createIncome()
+    public function createIncome(AccountService $accountService)
     {
-        $accounts = Account::where('user_id', Auth::user()->id)->get();
+        $accounts = $accountService->getAccountsOfUser();
 
         return view('transactions.transaction-income', ['accounts' => $accounts]);
     }
 
-    public function createIncomeSubmit(Request $request, RateService $rateService)
+    public function createIncomeSubmit(Request $request, TransactionService $transactionService)
     {
-        $account = Account::where('id', $request->account)->first();
-        $transaction = new Transaction();
+        $transactionService->createIncome($request);
 
-        $transaction->user_id = Auth::user()->id;
-        $transaction->account_id = $request->account;
-        $transaction->type = 'income';
-        $transaction->currency = $request->currency;
-        $transaction->count = $request->count;
-        $transaction->save();
-        $account->count += $rateService->convert($request->currency, $account->currency, $request->count);
-        $account->save();
+        return redirect()->route('transactions');
+    }
+
+    public function createExpense(AccountService $accountService)
+    {
+        $accounts = $accountService->getAccountsOfUser();
+
+        return view('transactions.transaction-expense', ['accounts' => $accounts]);
+    }
+
+    public function createExpenseSubmit(Request $request, TransactionService $transactionService)
+    {
+
+
+        $transactionService->createExpence($request);
+
         return redirect()->route('transactions');
     }
 }

@@ -35,6 +35,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="d-inline-block">
+                            <a href="{{route('account-create')}}">
+                                <button type="button" class="btn btn-primary">
+                                    Add account
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

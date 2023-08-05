@@ -40,7 +40,7 @@ class RateService
         $total = 0;
 
         foreach ($accounts as $account) {
-            if ($account->currency == $default_currency){
+            /*if ($account->currency == $default_currency){
                 $total += $account->count;
             } elseif($account->currency == 'UAH') {
                 $rate = $this->getRate($default_currency);
@@ -51,7 +51,8 @@ class RateService
                 $rate1 = $this->getRate($default_currency)['sale'];
                 $rate2 = $this->getRate($account->currency)['sale'];
                 $total += $account->count * ($rate2/$rate1);
-            }
+            }*/
+            $total += $this->convert($account->currency, $default_currency, $account->count);
         }
         return number_format($total,2);
     }

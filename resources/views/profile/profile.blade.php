@@ -131,12 +131,30 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="row">
+                            <div class="d-inline-block">
                                 <a href="{{route('account-create')}}">
                                     <button type="button" class="btn btn-primary">
                                         Add account
                                     </button>
                                 </a>
+                            </div>
+                            <div class="d-inline-block" style=" float: right">
+                                <div class="d-inline-block">
+                                    <a href="{{route('transaction-create-income')}}">
+                                        <button type="button" class="btn btn-primary">
+                                            Deposit
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="d-inline-block" style="margin-left: 5px">
+                                    <div>
+                                        <a href="{{route('transaction-create-expense')}}">
+                                            <button type="button" class="btn btn-primary">
+                                                Windraw
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

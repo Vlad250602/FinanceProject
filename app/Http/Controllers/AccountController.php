@@ -3,27 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Transaction;
+use App\Services\AccountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
-    public function view(){
+    public function view()
+    {
         return view('accounts.accounts',['accounts' => Account::where('user_id', Auth::user()->id)->get()]);
     }
-    public function create(){
+    public function create()
+    {
         return view('accounts.account-create');
     }
 
-    public function createSubmit(Request $request){
-        $account = new Account();
+    public function createSubmit(Request $request, AccountService $accountService)
+    {
+        $accountNames = $accountService->getArrayOfAccountsByUser(Auth::user()->id);
 
-        $account->user_id = Auth::user()->id;
-        $account->name = $request->name;
-        $account->currency = $request->currency;
-        $account->count = $request->count;
+        $validated = $request->validate([
+            'name' => 'required|not_in:' . $accountNames
+        ]);
 
-        $account->save();
+        $accountService->createAccount($request);
 
         return redirect()->route('profile');
     }
@@ -35,13 +40,15 @@ class AccountController extends Controller
         return view('accounts.account-edit', ['account' => $account]);
     }
 
-    public function editSubmit(Request $request, $id)
+    public function editSubmit(Request $request, $id, AccountService $accountService)
     {
-        $account = Account::where('id', $id)->first();
+        $accountNames = $accountService->getArrayOfAccountsByUser(Auth::user()->id);
 
-        $account->name = $request->name;
+        $validated = $request->validate([
+            'name' => 'required|not_in:' . $accountNames
+        ]);
 
-        $account->save();
+        $accountService->editAccount($request, $id);
 
         return redirect()->route('accounts');
     }
