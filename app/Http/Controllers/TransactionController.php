@@ -49,8 +49,22 @@ class TransactionController extends Controller
     public function createExpenseSubmit(Request $request, TransactionService $transactionService)
     {
 
-
         $transactionService->createExpence($request);
+
+        return redirect()->route('transactions');
+    }
+
+    public function createBetween(AccountService $accountService)
+    {
+        $accounts = $accountService->getAccountsOfUser();
+
+        return view('transactions.transaction-between', ['accounts' => $accounts]);
+    }
+
+    public function createBetweenSubmit(Request $request, TransactionService $transactionService)
+    {
+
+        $transactionService->createBetweenAcc($request);
 
         return redirect()->route('transactions');
     }

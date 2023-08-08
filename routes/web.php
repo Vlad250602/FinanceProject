@@ -24,6 +24,10 @@ Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('ho
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
+Route::get('/profile-update', [App\Http\Controllers\HomeController::class, 'profileUpdate'])->name('profile-update');
+Route::post('/profile-update', [App\Http\Controllers\HomeController::class, 'profileUpdateSubmit']);
+
+
 Route::get('/account-create', [App\Http\Controllers\AccountController::class, 'create'])->name('account-create');
 Route::post('/account-create', [App\Http\Controllers\AccountController::class, 'createSubmit']);
 
@@ -39,3 +43,6 @@ Route::post('/transaction-create/income',[\App\Http\Controllers\TransactionContr
 
 Route::get('/transaction-create/expense',[\App\Http\Controllers\TransactionController::class, 'createExpense'])->name('transaction-create-expense');
 Route::post('/transaction-create/expense',[\App\Http\Controllers\TransactionController::class, 'createExpenseSubmit']);
+
+Route::get('/transaction-create/between',[\App\Http\Controllers\TransactionController::class, 'createBetween'])->name('transaction-create-between');
+Route::post('/transaction-create/between',[\App\Http\Controllers\TransactionController::class, 'createBetweenSubmit']);

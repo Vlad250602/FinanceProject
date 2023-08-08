@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Windraw') }}</div>
+                <div class="card-header">{{ __('Between account transaction') }}</div>
                     <form method="post">
                         @csrf
                         <div class="card-body">
@@ -13,24 +13,27 @@
                                 <label for="account">Account</label>
                                 <select name="account" class="form-control" id="account">
                                     @foreach($accounts as $account)
-                                        <option value="{{$account->id}}">{{$account->name}}</option>
+                                        <option value="{{$account->id}}">{{$account->name . ' ' . $account->currency}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="currency">Currency</label>
-                                <select name="currency" class="form-control" id="currency">
-                                    <option value="UAH">UAH</option>
-                                    <option value="USD">USD</option>
-                                    <option value="EUR">EUR</option>
-                                </select>
-                            </div>
+
                             <div class="form-group">
                                 <label for="count">Count</label>
                                 <input type="text" id="count" class="form-control" name="count" value="0">
                             </div>
+
+                            <div class="form-group">
+                                <label for="account2">Account</label>
+                                <select name="account2" class="form-control" id="account2">
+                                    @foreach($accounts as $account)
+                                        <option value="{{$account->id}}">{{$account->name . ' ' . $account->currency}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <br>
-                            <button type="submit" class="btn btn-primary">Windraw</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
             </div>

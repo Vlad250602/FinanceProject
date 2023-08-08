@@ -13,20 +13,25 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <td>Account</td>
                                 <th>Type</th>
+                                <th>Account</th>
                                 <th>Currency</th>
                                 <th>Count</th>
+                                <th>Account to</th>
+                                <th>Currency to</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($transactions as $item)
-                                <tr style="background-color: @if($item->type == 'income') #e7ffde @else #ffdede @endif">
+
+                                <tr style="background-color: @if($item->type == 'income') #e7ffde @elseif($item->type == 'expense') #ffdede @endif">
                                     <td style="background: 0">{{$item->id}}</td>
-                                    <td style="background: 0">{{$item->account}}</td>
                                     <td style="background: 0">{{$item->type}}</td>
+                                    <td style="background: 0">{{$item->account}}</td>
                                     <td style="background: 0">{{$item->currency}}</td>
                                     <td style="background: 0">{{$item->count}}</td>
+                                    <td style="background: 0">{{$item->account2}}</td>
+                                    <td style="background: 0">{{$item->currency2}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

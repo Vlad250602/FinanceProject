@@ -70,9 +70,34 @@ class AccountService
     public function removeFromAccount($request){
         $rateService = new RateService();
         $account = Account::where('id', $request->account)->first();
+        if(($account->count - $rateService->convert($request->currency, $account->currency, $request->count) < 0)){
+            return false;
+
+        };
         $account->count -= $rateService->convert($request->currency, $account->currency, $request->count);
         $account->save();
+        return true;
     }
+
+    public function transactionBetweenAcc($acc1, $acc2, $count)
+    {
+        $rateService = new RateService();
+
+        if(($acc1->count - $count) < 0 ) {
+            return false;
+        }
+        /*DB::transaction(function(){
+            DB::update('update accounts set count=$count1 where id=$id1');
+            DB::update('update accounts set count=$count2 where id=$id2');
+        });*/
+
+        $acc1->count -= $count;
+        $acc2->count += $rateService->convert($acc1->currency, $acc2->currency, $count);;
+        $acc1->save();
+        $acc2->save();
+        return true;
+    }
+
 
     public function editAccount($request, $id){
 

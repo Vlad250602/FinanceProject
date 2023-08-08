@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false);
-            $table->unsignedBigInteger('account_id')->nullable(false);
             $table->enum('type', ['income', 'expense', 'between_acc'])->nullable(false);
+
+            $table->unsignedBigInteger('account_id')->nullable(false);
             $table->decimal('count', 10,2)->default(0);
-            $table->text('description')->nullable(true);
             $table->enum('currency', ['UAH', 'USD', 'EUR'])->nullable(false);
-            $table->timestamps();
 
             $table->unsignedBigInteger('account_id2')->nullable(true)->default(null);
+            $table->decimal('count2', 10,2)->default(0);
             $table->enum('currency2', ['UAH', 'USD', 'EUR'])->nullable(true)->default(null);
+
+            $table->text('description')->nullable(true);
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('account_id')->references('id')->on('accounts');

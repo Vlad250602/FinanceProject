@@ -22,10 +22,9 @@
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                  class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3">{{Auth::user()->name . ' ' . Auth::user()->surname}}</h5>
-                            <p class="text-muted mb-1">Full Stack Developer</p>
-                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                            <p class="text-muted mb-1">Default currency - {{Auth::user()->currency}}</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <button type="button" class="btn btn-outline-primary ms-1">Update profile</button>
+                                <a href="{{route('profile-update')}}"><button type="button" class="btn btn-outline-primary ms-1">Update profile</button></a>
                             </div>
                         </div>
                     </div>
@@ -139,7 +138,14 @@
                                 </a>
                             </div>
                             <div class="d-inline-block" style=" float: right">
-                                <div class="d-inline-block">
+                                <div class="d-inline-block" style="margin-left: 5px">
+                                    <a href="{{route('transaction-create-between')}}">
+                                        <button type="button" class="btn btn-primary">
+                                            Between accounts
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="d-inline-block" style="margin-left: 5px">
                                     <a href="{{route('transaction-create-income')}}">
                                         <button type="button" class="btn btn-primary">
                                             Deposit
